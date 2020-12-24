@@ -2,7 +2,6 @@
 #include<Windows.h>
 #include "allFunctions.h"
 using namespace std;
-
 int main()
 {
 	string first_name, last_name;
@@ -40,8 +39,8 @@ int main()
 			// If entered values are proper, then clear the terminal and break the loop else print error message
 			if (day_check_in <= 31 && day_check_in > 0 && month_check_in <= 12 && month_check_in > 0 && year_check_in >= 2021)
 				break;
-			
-			else {
+			else 
+			{
 				system("CLS");
 				printErrorMessage();
 			}
@@ -60,6 +59,10 @@ int main()
 			cin >> month_check_out;
 			cout << "year:  " << endl;
 			cin >> year_check_out;
+
+			day_check_out = int(day_check_out);
+			month_check_out = int(month_check_out);
+			year_check_out = int(year_check_out);
 			system("CLS");
 
 			// If entered values are proper, then clear the terminal and break the loop else print error message
@@ -67,7 +70,8 @@ int main()
 				break;
 			else
 			{
-				printErrorMessage();
+				system("CLS");
+				printErrorMessage;
 			}
 		}
 
@@ -75,25 +79,50 @@ int main()
 	
 		// Calculate days stays at hotel
 		living_days = dateToDay(day_check_out, month_check_out, year_check_out) - dateToDay(day_check_in, month_check_in, year_check_in);
+		if (living_days <= 0)
+			cout << "Oops! Something went wrong. Please try again!" << endl;
 	}
 	
 
 	// Prints all information about rooms
 	roomTypesPrint();
 
-	cout << "Please choose a room type by its number:" << endl;
-	cin >> room_type;
+	while (true)
+	{
+		cout << "Please choose a room type by its number:" << endl;
+		cin >> room_type;
+		system("CLS");
+		if (room_type == 1 || room_type == 2 || room_type == 3 || room_type == 4 || room_type == 5 || room_type == 6 || room_type == 7)
+			break;
+		else
+		{
+			printErrorMessage;
+		}
+	}
 
+	cout << "Price per additional bed:" << endl;
+	cout << "Single beds: $34" << endl;
+	cout << "Double beds: $51" << endl;
 	cout << "Do you want any additional beds?" << endl;
 	cout << "Enter '1' if you want additional beds" << endl;
 	cout << "Enter 'any number' if you do not want additional beds" << endl;
 	cin >> want_bed;
 
 	if (want_bed == 1) {
-		cout << "What type of additional bed do you want?" << endl;
-		cout << "Enter 1 for single bed" << endl;
-		cout << "Enter 2 for double bed" << endl;
-		cin >> bed_type;
+		while (true)
+		{
+			cout << "What type of additional bed do you want?" << endl;
+			cout << "Enter 1 for single bed" << endl;
+			cout << "Enter 2 for double bed" << endl;
+			cin >> bed_type;
+			if (bed_type == 1 || bed_type == 2)
+				break;
+			else
+			{
+				system("CLS");
+				printErrorMessage;
+			}
+		}
 
 		if (bed_type == 1) {
 			cout << "How many single beds do you want?	" << endl;
@@ -104,7 +133,10 @@ int main()
 			cin >> additional_beds;
 		}
 		else
+		{
+			system("CLS");
 			printErrorMessage;
+		}
 
 	}
 	

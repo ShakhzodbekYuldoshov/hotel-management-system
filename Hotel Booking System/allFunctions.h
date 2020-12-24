@@ -22,7 +22,7 @@ int dateToDay(int day, int month, int year) {
 		if (year % 100 == 0) {
 			if (year % 400 == 0)
 				// Leap year
-				leap_year = 1;;
+				leap_year = 1;
 		}
 		else
 			// Leap year
@@ -45,16 +45,13 @@ int dateToDay(int day, int month, int year) {
 		else if (i == 3)
 		{
 			if (leap_year == 1)
-			{
 				days_in_month = 29;
-			}
 			else
 				days_in_month = 28;
 		}
 
 		else if (i >= 6 && i % 2 == 0)
 			days_in_month = 30;
-
 		else
 			days_in_month = 31;
 
@@ -82,10 +79,7 @@ void roomTypesPrint()
 
 		// Additional beds information
 		cout << "\nYou may add additional beds for all the rooms" << endl;
-		cout << "\tPrice per additional bed:" << endl;
-		cout << "\t\tSingle beds: $34" << endl;
-		cout << "\t\tDouble beds: $51" << endl;
-
+		
 		//Single room information
 		cout << "\n1.Single" << endl;
 		cout << "\tRoom size: 37m^2" << endl;
@@ -181,13 +175,9 @@ int duePriceCalculator(int difference_in_day, int room_type, int additional_beds
 
 	// Adding additional beds price to due_price
 	if (additional_bed_type == 1)
-	{
 		due_price += additional_beds * 34;
-	}
 	else if (additional_bed_type == 2)
-	{
 		due_price += additional_beds * 51;
-	}
 
 
 	return due_price;
