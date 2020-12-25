@@ -8,7 +8,7 @@ void roomTypesPrint();
 int duePriceCalculator(int difference_in_day, int room_type, int additional_beds, int additional_bed_type);
 // Error message printer
 void printErrorMessage() {
-	cout << "Oops! You entered wrong value. Please try again!" << endl;
+	cout << "\t\tOops! You entered wrong value. Please try again!\n" << endl;
 }
 
 
@@ -49,6 +49,7 @@ int dateToDay(int day, int month, int year) {
 			else
 				days_in_month = 28;
 		}
+
 
 		else if (i >= 6 && i % 2 == 0)
 			days_in_month = 30;
@@ -140,7 +141,7 @@ void roomTypesPrint()
 
 
 // Calculates money that should be paid
-int duePriceCalculator(int difference_in_day, int room_type, int additional_beds, int additional_bed_type)
+int duePriceCalculator(int difference_in_day, int room_type, int additional_beds = 0, int additional_bed_type = 0)
 {
 	int due_price = 0;
 

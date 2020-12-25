@@ -9,7 +9,8 @@ int main()
 	int day_check_in, month_check_in, year_check_in;
 	int day_check_out, month_check_out, year_check_out;
 	int living_days = -1, room_type;	
-	int additional_beds = 0,  want_bed, bed_type;
+	int additional_beds = 0,  want_bed, bed_type=0;
+	int due_price, want_continue = 1;
 
 	system("Color 0A");
 
@@ -84,61 +85,80 @@ int main()
 	}
 	
 
-	// Prints all information about rooms
-	roomTypesPrint();
-
 	while (true)
 	{
-		cout << "Please choose a room type by its number:" << endl;
-		cin >> room_type;
-		system("CLS");
-		if (room_type == 1 || room_type == 2 || room_type == 3 || room_type == 4 || room_type == 5 || room_type == 6 || room_type == 7)
-			break;
-		else
-		{
-			printErrorMessage;
-		}
-	}
-
-	cout << "Price per additional bed:" << endl;
-	cout << "Single beds: $34" << endl;
-	cout << "Double beds: $51" << endl;
-	cout << "Do you want any additional beds?" << endl;
-	cout << "Enter '1' if you want additional beds" << endl;
-	cout << "Enter 'any number' if you do not want additional beds" << endl;
-	cin >> want_bed;
-
-	if (want_bed == 1) {
+		// Prints all information about rooms
+		roomTypesPrint();
 		while (true)
 		{
-			cout << "What type of additional bed do you want?" << endl;
-			cout << "Enter 1 for single bed" << endl;
-			cout << "Enter 2 for double bed" << endl;
-			cin >> bed_type;
-			if (bed_type == 1 || bed_type == 2)
+			cout << "Please choose a room type by its number:" << endl;
+			cin >> room_type;
+			system("CLS");
+			if (room_type == 1 || room_type == 2 || room_type == 3 || room_type == 4 || room_type == 5 || room_type == 6 || room_type == 7)
 				break;
 			else
 			{
-				system("CLS");
 				printErrorMessage;
 			}
 		}
 
-		if (bed_type == 1) {
-			cout << "How many single beds do you want?	" << endl;
-			cin >> additional_beds;
-		}
-		else if (bed_type == 2) {
-			cout << "How many double beds do you want?  " << endl;
-			cin >> additional_beds;
-		}
-		else
-		{
-			system("CLS");
-			printErrorMessage;
-		}
+		cout << "Price per additional bed:" << endl;
+		cout << "\t\tSingle beds: $34" << endl;
+		cout << "\t\tDouble beds: $51" << endl;
+		cout << "Do you want any additional beds?" << endl;
+		cout << "Enter '1' if you want additional beds" << endl;
+		cout << "Enter 'any number' if you do not want additional beds" << endl;
+		cin >> want_bed;
+		system("CLS");
 
+		if (want_bed == 1) {
+			while (true)
+			{
+				cout << "What type of additional bed do you want?" << endl;
+				cout << "Enter 1 for single bed" << endl;
+				cout << "Enter 2 for double bed" << endl;
+				cin >> bed_type;
+				system("CLS");
+
+				if (bed_type == 1 || bed_type == 2)
+					break;
+				else
+					printErrorMessage;
+			}
+
+			if (bed_type == 1) {
+				cout << "How many single beds do you want?	" << endl;
+				cin >> additional_beds;
+				system("CLS");
+			}
+			else if (bed_type == 2) {
+				cout << "How many double beds do you want?  " << endl;
+				cin >> additional_beds;
+				system("CLS");
+			}
+			else
+				system("CLS");
+				printErrorMessage;
+		}	
+
+		due_price = duePriceCalculator(living_days, room_type, additional_beds, bed_type);
+		
+		while (true)
+		{
+			cout << "\t\tYOU SHOULD PAY " << due_price << "!" << endl;
+			cout << "\n\t\tDo you want continue? 1/2" << endl;
+			cout << "If you want to continue enter ' 1 '" << endl;
+			cout << "If you do not want to continue enter ' 2 '" << endl;
+			cin >> want_continue;
+			system("CLS");
+
+			if (want_continue == 1 || want_continue == 2)
+				break;
+			else
+				printErrorMessage;
+		}
 	}
+	
 	
 
 	//Get user full name and phone number
