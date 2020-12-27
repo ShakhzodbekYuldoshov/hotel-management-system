@@ -38,10 +38,8 @@ int dateToDay(int day, int month, int year) {
 	for (int i = 1; i <= month; i++) {
 		if (i == 1)
 			days_in_month = 0;
-
 		else if (i <= 5 && i % 2 == 1)
 			days_in_month = 30;
-
 		else if (i == 3)
 		{
 			if (leap_year == 1)
@@ -49,21 +47,15 @@ int dateToDay(int day, int month, int year) {
 			else
 				days_in_month = 28;
 		}
-
-
 		else if (i >= 6 && i % 2 == 0)
 			days_in_month = 30;
 		else
 			days_in_month = 31;
 
 		days_until_month += days_in_month;
-
 	}
-
 	// negative one is for subtracting last day
 	day += days_until_month;
-
-
 	return day;
 }
 
