@@ -1,7 +1,8 @@
 ﻿  hotel_management_system.cpp
-F:\C++\hotel-management-system\Hotel Booking System\hotel_management_system.cpp(75,5): warning C4551: function call missing argument list
-F:\C++\hotel-management-system\Hotel Booking System\hotel_management_system.cpp(101,5): warning C4551: function call missing argument list
-F:\C++\hotel-management-system\Hotel Booking System\hotel_management_system.cpp(126,6): warning C4551: function call missing argument list
-F:\C++\hotel-management-system\Hotel Booking System\hotel_management_system.cpp(141,5): warning C4551: function call missing argument list
-F:\C++\hotel-management-system\Hotel Booking System\hotel_management_system.cpp(158,5): warning C4551: function call missing argument list
-  Hotel Booking System.vcxproj -> F:\C++\hotel-management-system\x64\Debug\Hotel Booking System.exe
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(101,5): warning C4551: function call missing argument list
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(110,4): warning C4551: function call missing argument list
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(132,5): warning C4551: function call missing argument list
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(168,6): warning C4551: function call missing argument list
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(196,5): warning C4551: function call missing argument list
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(223,5): warning C4551: function call missing argument list
+  Hotel Booking System.vcxproj -> D:\C++\hotel management system\x64\Debug\Hotel Booking System.exe

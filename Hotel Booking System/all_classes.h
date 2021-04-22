@@ -6,18 +6,25 @@ using namespace std;
 class Bed
 {
 private:
-	string type;
+	string type_str;
+	int type_int;
 	int additional_bed;
 public:
 	Bed()
 	{
-		type = "None";
+		type_str = "None";
+		type_int = 0;
 		additional_bed = 0;
 	}
 
-	void set_type(string type)
+	void set_type(int type)
 	{
-		this->type = type;
+		if (type == 1)
+			type_str = "Single";
+		else if (type == 2)
+			type_str = "Double";
+
+		this->type_int = type;
 	}
 
 	void set_additional_bed(int additional_bed)
@@ -25,9 +32,14 @@ public:
 		this->additional_bed = additional_bed;
 	}
 
-	string get_bed_type()
+	string get_bed_type_str()
 	{
-		return type;
+		return type_str;
+	}
+
+	int get_bed_type_int()
+	{
+		return type_int;
 	}
 
 	int get_additional_bed()
@@ -37,23 +49,52 @@ public:
 };
 
 
-class Room :public Bed
+class Room :private Bed
 {
 private:
-	string type;
+	string type_str;
+	int type_int;
 	Bed bed;
 public:
 	Room()
 	{
-		type = "None";
+		type_str = "None";
+		type_int = 0;
 	}
 
-	void set_room_type(string room_type)
+	void set_room_type(int room_type)
 	{
-		this->type = room_type;
+		switch (room_type)
+		{
+		case 1:
+			type_str = "Single";
+			break;
+		case 2:
+			type_str = "Double";
+			break;
+		case 3:
+			type_str = "Triple";
+			break;
+		case 4:
+			type_str = "Queen";
+			break;
+		case 5:
+			type_str = "King";
+			break;
+		case 6:
+			type_str = "Double double";
+			break;
+		case 7:
+			type_str = "Apartment";
+			break;
+		default:
+			break;
+		}
+
+		this->type_int = room_type;
 	}
 
-	void set_bed_type(string bed_type)
+	void set_bed_type(int bed_type)
 	{
 		bed.set_type(bed_type);
 	}
@@ -63,14 +104,24 @@ public:
 		bed.set_additional_bed(additional_bed);
 	}
 
-	string get_room_type()
+	string get_room_type_str()
 	{
-		return type;
+		return type_str;
 	}
 
-	string get_bed_type()
+	int get_room_type_int()
 	{
-		return bed.get_bed_type();
+		return type_int;
+	}
+
+	string get_bed_type_str()
+	{
+		return bed.get_bed_type_str();
+	}
+
+	int get_bed_type_int()
+	{
+		return bed.get_bed_type_int();
 	}
 
 	int get_additional_bed()
@@ -83,13 +134,15 @@ public:
 class Person 
 {
 private:
-	string first_name, last_name;
+	string first_name, last_name, username, password;
 	long int phone_number;
 public:
 	Person()
 	{
 		first_name = "Unknown";
 		last_name = "Unknown";
+		username = "Unknown";
+		password = "Unknown";
 		phone_number = 0;
 	}
 
@@ -108,6 +161,16 @@ public:
 		this->phone_number = phone_number;
 	}
 
+	void set_username(string username)
+	{
+		this->username = username;
+	}
+
+	void set_password(string password)
+	{
+		this->password = password;
+	}
+
 	string get_first_name()
 	{
 		return first_name;
@@ -122,10 +185,20 @@ public:
 	{
 		return phone_number;
 	}
+
+	string get_username()
+	{
+		return username;
+	}
+
+	string get_password()
+	{
+		return password;
+	}
 };
 
 
-class Client :public Person, public Room
+class Client :private Person, private Room
 {
 private:
 	Person person;
@@ -195,6 +268,147 @@ public:
 			living_days = check_out_days - check_in_days;
 
 		check_out_date = this->day_check_out + "/" + this->month_check_out + "/" + this->year_check_out;
+	}
+
+	void set_first_name(string first_name)
+	{
+		person.set_first_name(first_name);
+	}
+
+	void set_last_name(string last_name)
+	{
+		person.set_last_name(last_name);
+	}
+
+	void set_username(string username)
+	{
+		person.set_username(username);
+	}
+
+	void set_password(string password)
+	{
+		person.set_password(password);
+	}
+
+	void set_phone_number(long int phone_number)
+	{
+		person.set_phone_number(phone_number);
+	}
+
+	void set_room_type(int room_type)
+	{
+		room.set_room_type(room_type);
+	}
+
+	void set_bed_type(int bed_type)
+	{
+		room.set_bed_type(bed_type);
+	}
+
+	void set_additional_bed(int additional_bed)
+	{
+		room.set_additional_bed(additional_bed);
+	}
+
+	void set_due_price()
+	{
+		float due_price = 0;
+
+		// Accoring to room type calculate due money
+		switch (room.get_room_type_int())
+		{
+		case 1:
+			due_price += living_days * 84;
+			break;
+		case 2:
+			due_price += living_days * 107;
+			break;
+		case 3:
+			due_price += living_days * 141;
+			break;
+		case 4:
+			due_price += living_days * 120;
+			break;
+		case 5:
+			due_price += living_days * 120;
+			break;
+		case 6:
+			due_price += living_days * 180;
+			break;
+		case 7:
+			due_price += living_days * 300;
+			break;
+		default:
+			cout << "Entered wrong number of the type of room!" << endl;
+			break;
+		}
+
+		// Adding additional beds price to due_price
+		if (room.get_bed_type_int() == 1)
+			due_price += room.get_additional_bed() * 34;
+		else if (room.get_bed_type_int() == 2)
+			due_price += room.get_additional_bed() * 51;
+
+	}
+
+	string get_first_name()
+	{
+		return person.get_first_name();
+	}
+
+	string get_last_name()
+	{
+		return person.get_last_name();
+	}
+
+	string get_username()
+	{
+		return person.get_password();
+	}
+
+	string get_password()
+	{
+		return person.get_password();
+	}
+
+	long int get_phone_number()
+	{
+		return person.get_phone_number();
+	}
+
+	string get_room_type()
+	{
+		return room.get_room_type_str();
+	}
+
+	string get_bed_type()
+	{
+		return room.get_bed_type_str();
+	}
+
+	int get_additional_bed()
+	{
+		return room.get_additional_bed();
+	}
+
+	string get_check_in_date()
+	{
+		return check_in_date;
+	}
+
+	string get_check_out_date()
+	{
+		return check_in_date;
+	}
+
+	int get_living_days()
+	{
+		return living_days;
+	}
+
+	float get_due_price()
+	{
+		return due_price;
 	}
 
 };
