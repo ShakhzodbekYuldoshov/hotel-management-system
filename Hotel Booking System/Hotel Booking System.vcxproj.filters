@@ -23,5 +23,8 @@
     <ClInclude Include="allFunctions.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="all_classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
