@@ -231,15 +231,17 @@ public:
 	void set_check_in_date(int day_check_in, int month_check_in, int year_check_in)
 	{
 		stringstream ss;
+		stringstream mm;
+		stringstream yy;
 
 		ss << day_check_in;
 		ss >> this->day_check_in;
 
-		ss << month_check_in;
-		ss >> this->month_check_in;
+		mm << month_check_in;
+		mm >> this->month_check_in;
 
-		ss << year_check_in;
-		ss >> this->year_check_in;
+		yy << year_check_in;
+		yy >> this->year_check_in;
 
 		check_in_days = dateToDay(day_check_in, month_check_in, year_check_in);
 
@@ -252,15 +254,17 @@ public:
 	void set_check_out_date(int day_check_out, int month_check_out, int year_check_out)
 	{
 		stringstream ss;
+		stringstream mm;
+		stringstream yy;
 
 		ss << day_check_out;
 		ss >> this->day_check_out;
 
-		ss << month_check_in;
-		ss >> this->month_check_out;
+		mm << month_check_out;
+		mm >> this->month_check_out;
 
-		ss << year_check_out;
-		ss >> this->year_check_out;
+		yy << year_check_out;
+		yy >> this->year_check_out;
 
 		check_out_days = dateToDay(day_check_out, month_check_out, year_check_out);
 
@@ -348,7 +352,7 @@ public:
 			due_price += room.get_additional_bed() * 34;
 		else if (room.get_bed_type_int() == 2)
 			due_price += room.get_additional_bed() * 51;
-
+		this->due_price = due_price;
 	}
 
 	string get_first_name()
@@ -363,7 +367,7 @@ public:
 
 	string get_username()
 	{
-		return person.get_password();
+		return person.get_username();
 	}
 
 	string get_password()
@@ -398,7 +402,7 @@ public:
 
 	string get_check_out_date()
 	{
-		return check_in_date;
+		return check_out_date;
 	}
 
 	int get_living_days()
@@ -412,6 +416,9 @@ public:
 	}
 
 };
+
+
+
 
 
 

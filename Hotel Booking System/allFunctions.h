@@ -13,51 +13,6 @@ void printErrorMessage() {
 
 
 
-// Converter date to days
-int dateToDay(int day, int month, int year) {
-	int days_in_month = 0, days_until_month = 0, leap_year = 0;//leap year variable is for checking leap year while adding days for february
-
-	// find leap year
-	if (year % 4 == 0) {
-		if (year % 100 == 0) {
-			if (year % 400 == 0)
-				// Leap year
-				leap_year = 1;
-		}
-		else
-			// Leap year
-			leap_year = 1;
-	}
-
-
-	// calculating all days until entered month
-	// in 1 month add 0 days for days_until_month
-	// in 3,5,6,8,10,12 months make 31 value and add it days_until month variable
-	// in 2 add 28 or 29 according to leap year for days_until_month
-	// in 4,7, 9, 11 months add 30 for days_until_month
-	for (int i = 1; i <= month; i++) {
-		if (i == 1)
-			days_in_month = 0;
-		else if (i <= 5 && i % 2 == 1)
-			days_in_month = 30;
-		else if (i == 3)
-		{
-			if (leap_year == 1)
-				days_in_month = 29;
-			else
-				days_in_month = 28;
-		}
-		else if (i >= 6 && i % 2 == 0)
-			days_in_month = 30;
-		else
-			days_in_month = 31;
-
-		days_until_month += days_in_month;
-	}
-	// negative one is for subtracting last day
-	day += days_until_month;
-	return day;
-}
 
 
 // Print types of rooms with information
@@ -175,3 +130,5 @@ int duePriceCalculator(int difference_in_day, int room_type, int additional_beds
 
 	return due_price;
 }
+
+
