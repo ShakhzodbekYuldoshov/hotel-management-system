@@ -27,7 +27,7 @@ void roomTypesPrint()
 
 		// Additional beds information
 		cout << "\nYou may add additional beds for all the rooms" << endl;
-		
+
 		//Single room information
 		cout << "\n1.Single" << endl;
 		cout << "\tRoom size: 37m^2" << endl;
@@ -130,5 +130,3 @@ int duePriceCalculator(int difference_in_day, int room_type, int additional_beds
 
 	return due_price;
 }
-
-

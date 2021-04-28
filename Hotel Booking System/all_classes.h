@@ -131,11 +131,11 @@ public:
 };
 
 
-class Person 
+class Person
 {
 private:
 	string first_name, last_name, username, password;
-	long int phone_number;
+	string phone_number;
 public:
 	Person()
 	{
@@ -143,7 +143,7 @@ public:
 		last_name = "Unknown";
 		username = "Unknown";
 		password = "Unknown";
-		phone_number = 0;
+		phone_number ="";
 	}
 
 	void set_first_name(string first_name)
@@ -156,7 +156,7 @@ public:
 		this->last_name = last_name;
 	}
 
-	void set_phone_number(long int phone_number)
+	void set_phone_number(string phone_number)
 	{
 		this->phone_number = phone_number;
 	}
@@ -181,7 +181,7 @@ public:
 		return last_name;
 	}
 
-	long int get_phone_number()
+	string get_phone_number()
 	{
 		return phone_number;
 	}
@@ -294,7 +294,7 @@ public:
 		person.set_password(password);
 	}
 
-	void set_phone_number(long int phone_number)
+	void set_phone_number(string phone_number)
 	{
 		person.set_phone_number(phone_number);
 	}
@@ -375,7 +375,7 @@ public:
 		return person.get_password();
 	}
 
-	long int get_phone_number()
+	string get_phone_number()
 	{
 		return person.get_phone_number();
 	}

@@ -1,3 +1,3 @@
 ﻿  hotel_management_system.cpp
-D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(15,6): warning C4101: 'due_price': unreferenced local variable
+D:\C++\hotel management system\Hotel Booking System\hotel_management_system.cpp(21,6): warning C4101: 'due_price': unreferenced local variable
   Hotel Booking System.vcxproj -> D:\C++\hotel management system\x64\Debug\Hotel Booking System.exe

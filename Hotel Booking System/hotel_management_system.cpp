@@ -1,19 +1,25 @@
 #include<iostream>
+#include <fstream>
+#include <string>
 #include<Windows.h>
 #include "allFunctions.h"
 #include "all_classes.h"
+#include "validation.h"
+
 using namespace std;
+
 int main()
 {
 	Client client;
-	string first_name, last_name, room_type_str, bed_type_str, username, password;
-	long int phone_number;
+	string first_name, last_name, room_type_str, bed_type_str,  password;
+	string phone_number, allData;
+	string inPhone_Number, inPassword, inUser;
 	int day_check_in, month_check_in, year_check_in;
 	int day_check_out, month_check_out, year_check_out;
 	int living_days = -1, room_type;
 	int additional_beds = 0, want_bed, bed_type = 0;
 	int due_price, want_continue = 1, program_num;
-
+	bool log_in;
 	system("Color 0A");
 
 	while (true)
@@ -39,16 +45,40 @@ int main()
 			}
 			system("CLS");
 
-			switch (program_num)
-			{
 				// Register page
-			case 1:
+			if (program_num == 1)
+			{
 				cout << "***************************" << endl;
 				cout << "     REGISTRATION" << endl;
 				cout << "***************************" << endl;
 				cout << endl;
 				cout << endl;
 
+				cout << "Phone number:" << endl;
+				while (!(cin >> phone_number))
+				{
+					cout << "ERROR: enter only a number: " << endl;
+					cin.clear();
+					cin.ignore();
+				}
+				client.set_phone_number(phone_number);
+				
+				cout << "Password:" << endl;
+				while (!(cin >> password))
+				{
+					cout << "ERROR: enter only your password not a number: " << endl;
+					cin.clear();
+					cin.ignore();
+				}
+				client.set_password(password);
+				string filename = phone_number+"_"+password + ".txt";
+				
+
+				ofstream outfile(filename.c_str());
+				ofstream out(filename);
+			
+				
+				
 				cout << "First name:" << endl;
 				while (!(cin >> first_name))
 				{
@@ -57,6 +87,7 @@ int main()
 					cin.ignore();
 				}
 				client.set_first_name(first_name);
+				
 
 				cout << "Last name:" << endl;
 				while (!(cin >> last_name))
@@ -67,34 +98,15 @@ int main()
 				}
 				client.set_last_name(last_name);
 
-				cout << "Phone number:" << endl;
-				while (!(cin >> phone_number))
-				{
-					cout << "ERROR: enter only a number: " << endl;
-					cin.clear();
-					cin.ignore();
-				}
-				client.set_phone_number(phone_number);
-
-
-				cout << "Username:" << endl;
-				while (!(cin >> username))
-				{
-					cout << "ERROR: enter only your username not a number: " << endl;
-					cin.clear();
-					cin.ignore();
-				}
-				client.set_username(username);
-
-
-				cout << "Password:" << endl;
-				while (!(cin >> password))
-				{
-					cout << "ERROR: enter only your password not a number: " << endl;
-					cin.clear();
-					cin.ignore();
-				}
-				client.set_password(password);
+				/*	cout << "Username:" << endl;
+					while (!(cin >> username))
+					{
+						cout << "ERROR: enter only your username not a number: " << endl;
+						cin.clear();
+						cin.ignore();
+					}
+					client.set_username(username);
+	             */
 
 				system("CLS");
 
@@ -122,7 +134,7 @@ int main()
 							cin.clear();
 							cin.ignore();
 						}
-						
+
 
 						cout << "month:  " << endl;
 						while (!(cin >> month_check_in))
@@ -388,19 +400,67 @@ int main()
 						printErrorMessage();
 				}
 
-				break;
 
-				//Lout page
-			case 2:
+				// tp get all  data to file
 
-				break;
+				out << "First name:  " << client.get_first_name() << endl;
+				out << "Last name:  " << client.get_last_name() << endl;
+				out << "Password : " << client.get_password() << endl;
+				out << "Phone number :" << client.get_phone_number() << endl;
+				out << "Additional bed:  " << client.get_additional_bed() << endl;
+				out << "Bed Type:  " << client.get_bed_type() << endl;
+				out << "Check in date:  " << client.get_check_in_date() << endl;
+				out << "Check out date:  " << client.get_check_out_date() << endl;
+				out << "Due price: $ " << client.get_due_price() << endl;
+				out << "Living days:  " << client.get_living_days() << endl;
+				out << "Room type:  " << client.get_room_type() << endl;
 
-			case 3:
-				exit(1);
-
-			default:
+				out.close();
 				break;
 			}
+				//Lout page
+			else if (program_num == 2) { 
+
+			cout << "***************************" << endl;
+			cout << "\tLOGIN " << endl;
+			cout << "***************************" << endl;
+			cout << "Enter your phone number :";
+			cin >> inPhone_Number;
+			cout << "Enter your password :";
+			cin >> inPassword;
+
+			inUser = inPhone_Number+"_"+inPassword + ".txt";
+			log_in = fexists(inUser);
+			if (log_in == true) {
+				ifstream in;
+				in.open(inUser);
+				cout << endl << endl << "*****User Info Check*****\n\n";
+				while (getline(in, allData)) {
+					cout << allData << endl;
+					
+				}
+				in.close();
+				system("pause");
+				system("CLS");
+
+			}
+			else {
+				cout << "\t\nIncorrect phonenumber or password !\n";
+
+			}
+			
+			
+			
+			break; }
+
+				
+
+			else
+			{
+				exit(1);
+			}
+
+			
 			cout << "Additional bed:  " << client.get_additional_bed() << endl;
 			cout << "Bed Type:  " << client.get_bed_type() << endl;
 			cout << "Check in date:  " << client.get_check_in_date() << endl;
@@ -412,9 +472,9 @@ int main()
 			cout << "Password" << client.get_password() << endl;
 			cout << "Phone number" << client.get_phone_number() << endl;
 			cout << "Room type:  " << client.get_room_type() << endl;
-			cout << "Username:  " << client.get_username() << endl;
+			//cout << "Username:  " << client.get_username() << endl;
 		}
-		
+
 
 	}
 
@@ -423,4 +483,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
